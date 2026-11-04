@@ -27,7 +27,7 @@ if page == "Home":
     col1, col2 = st.columns([1, 3])
 
     with col1:
-        st.image("c:/Users/DIL/Downloads/DataLens Analytics Logo.png", width=150)
+        st.image("DataLens Analytics Logo.png", width=150)
 
     with col2:
         st.title("Data Lens")
