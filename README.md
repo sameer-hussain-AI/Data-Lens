@@ -156,7 +156,7 @@ can install the application's dependencies.
 
 Aspiring Data Analyst \| Python \| Pandas \| Power BI \| Excel \| SQL \|
 AI
-
+    Live app: https://data-lens-by-sameer.streamlit.app
 -   GitHub: [sameer-hussain-AI](https://github.com/sameer-hussain-AI)
 -   LinkedIn: [Sameer
     Hussain](https://www.linkedin.com/in/sameer-hussain-920722356/)
