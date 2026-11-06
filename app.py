@@ -4,6 +4,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4 
 from io import BytesIO
 from datetime import datetime
+import matplotlib.pyplot as plt
 
 
 with st.sidebar:
@@ -206,7 +207,7 @@ elif page == "Data Preview":
                 st.dataframe(df[columns].head(rows))
             else:
                 st.info("No Column Selected")
-            search = st.text_input("Search Records", type="search")
+            search = st.text_input("Search Records")
 
             if search:
                 mask = (
@@ -506,12 +507,61 @@ elif page == "Visualization":
                 y_axis = st.selectbox("Select Column For Y-Axis", y_columns)
 
             if st.button("Generate Chart"):
-                if chart == "Bar chart":
-                    st.bar_chart(df, x=x_axis, y=y_axis)
-                elif chart == "Line chart":
-                    st.line_chart(df, x=x_axis, y=y_axis)
-                elif chart == "Scatter plot":
-                    st.scatter_chart(df, x=x_axis, y=y_axis)
+                try:
+                fig, ax = plt.subplots(figsize=(10, 5))
+
+                if chart_type == "Bar Chart":
+
+                    chart_data = df.groupby(x_axis)[y_axis].mean()
+
+                    ax.bar(
+                        chart_data.index.astype(str),
+                        chart_data.values
+                    )
+
+                    ax.set_title(f"{y_axis} by {x_axis}")
+                    ax.set_xlabel(x_axis)
+                    ax.set_ylabel(y_axis)
+                    plt.xticks(rotation=45)
+
+                elif chart_type == "Line Chart":
+
+                    ax.plot(
+                        df[x_axis],
+                        df[y_axis],
+                        marker="o"
+                    )
+
+                    ax.set_title(f"{y_axis} vs {x_axis}")
+                    ax.set_xlabel(x_axis)
+                    ax.set_ylabel(y_axis)
+                    plt.xticks(rotation=45)
+
+                elif chart_type == "Scatter Plot":
+
+                    ax.scatter(
+                        df[x_axis],
+                        df[y_axis],
+                        alpha=0.7
+                    )
+
+                    ax.set_title(f"{y_axis} vs {x_axis}")
+                    ax.set_xlabel(x_axis)
+                    ax.set_ylabel(y_axis)
+
+                ax.grid(True, alpha=0.3)
+                fig.tight_layout()
+
+                st.pyplot(fig)
+
+                plt.close(fig)
+
+            except Exception as e:
+
+                st.error(f"Unable to create chart: {e}")
+
+    else:
+        st.info("Please upload a dataset first.")
         elif file.name.endswith(".xlsx"):
             df = pd.read_excel(file)
             chart = st.selectbox(
