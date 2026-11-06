@@ -507,7 +507,7 @@ elif page == "Visualization":
                 y_axis = st.selectbox("Select Column For Y-Axis", y_columns)
 
             if st.button("Generate Chart"):
-                try:
+                
                 fig, ax = plt.subplots(figsize=(10, 5))
 
                 if chart_type == "Bar Chart":
@@ -556,9 +556,7 @@ elif page == "Visualization":
 
                 plt.close(fig)
 
-            except Exception as e:
-
-                st.error(f"Unable to create chart: {e}")
+            
 
     else:
         st.info("Please upload a dataset first.")
