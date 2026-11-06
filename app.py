@@ -1,4 +1,4 @@
-import streamlit as st
+I'llimport streamlit as st
 import pandas as pd
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4 
@@ -560,35 +560,7 @@ elif page == "Visualization":
 
     else:
         st.info("Please upload a dataset first.")
-        elif file.name.endswith(".xlsx"):
-            df = pd.read_excel(file)
-            chart = st.selectbox(
-                "Select Chart Type", ["Bar chart", "Line chart", "Scatter plot"]
-            )
-
-            if chart == "Bar chart":
-                y_columns = df.select_dtypes(include="number").columns
-                x_columns = df.select_dtypes(include=["category", "object"]).columns
-                x_axis = st.selectbox("Select Column For X-Axis", x_columns)
-                y_axis = st.selectbox("Select Column For Y-Axis", y_columns)
-            elif chart == "Line chart":
-                y_columns = df.select_dtypes(include="number").columns
-                x_columns = df.columns
-                x_axis = st.selectbox("Select Column For X-Axis", x_columns)
-                y_axis = st.selectbox("Select Column For Y-Axis", y_columns)
-            elif chart == "Scatter plot":
-                y_columns = df.select_dtypes(include="number").columns
-                x_columns = df.select_dtypes(include="number").columns
-                x_axis = st.selectbox("Select Column For X-Axis", x_columns)
-                y_axis = st.selectbox("Select Column For Y-Axis", y_columns)
-
-            if st.button("Generate Chart"):
-                if chart == "Bar chart":
-                    st.bar_chart(df, x=x_axis, y=y_axis)
-                elif chart == "Line chart":
-                    st.line_chart(df, x=x_axis, y=y_axis)
-                elif chart == "Scatter plot":
-                    st.scatter_chart(df, x=x_axis, y=y_axis)
+        
         else:
             st.error("File not supported")
 
