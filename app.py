@@ -820,4 +820,4 @@ elif page == "Visualization":
                         x_axis = st.selectbox(
                             "Select Column For X-Axis",
                             numeric_columns,
-                            key="scatter_x"
+                            key="scatter_x")
